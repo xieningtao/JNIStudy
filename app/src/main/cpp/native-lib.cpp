@@ -22,6 +22,6 @@ Java_com_example_jnistudy_MainActivity_formatName(JNIEnv *env, jobject thiz, jst
     char *test = new char[1024*1024];
     char *nullTest = nullptr;
     nullTest++;
-//    cout<<"nullTest"<< nullTest;
+    cout<<"nullTest"<< nullTest;
     return formatName;
 }
