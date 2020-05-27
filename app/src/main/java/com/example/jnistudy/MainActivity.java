@@ -1,38 +1,46 @@
 package com.example.jnistudy;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
 
-    // Example of a call to a native method
-    final TextView tv = findViewById(R.id.sample_text);
-    findViewById(R.id.format_bt).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            tv.setText(formatName(tv.getText().toString()));
+    }
 
-            String sign = SignUtils.getSign(MainActivity.this);
-            Log.i(TAG,"sign: "+sign);
-        }
-    });
+    private void initView() {
+        // Example of a call to a native method
+        final TextView tv = findViewById(R.id.sample_text);
+        findViewById(R.id.format_bt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv.setText(formatName(tv.getText().toString()));
 
+                String sign = SignUtils.getSign(MainActivity.this);
+                Log.i(TAG, "sign: " + sign);
+
+//                getValidToken(MainActivity.this);
+            }
+        });
+
+        findViewById(R.id.to_another_bt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AnotherJNIDemoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
